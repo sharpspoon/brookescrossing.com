@@ -6,6 +6,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 PAGES = [
     REPO_ROOT / "index.html",
     REPO_ROOT / "about/arc/index.html",
+    REPO_ROOT / "documents/index.html",
     REPO_ROOT / "about/dues/index.html",
     REPO_ROOT / "about/gate/index.html",
     REPO_ROOT / "about/links/index.html",
@@ -19,13 +20,19 @@ class StaticSiteTests(unittest.TestCase):
         for page in PAGES:
             self.assertTrue(page.exists(), f"Missing page: {page}")
 
-    def test_removed_documents_and_events_navigation(self) -> None:
+    def test_removed_events_and_stale_posts(self) -> None:
         for page in PAGES:
             content = page.read_text(encoding="utf-8")
-            self.assertNotIn(">Documents<", content)
             self.assertNotIn(">Events<", content)
             self.assertNotIn("HOA Updates/Reminders", content)
             self.assertNotIn("January 31st 2024", content)
+
+    def test_documents_page_lists_all_downloads(self) -> None:
+        content = (REPO_ROOT / "documents/index.html").read_text(encoding="utf-8")
+        self.assertIn("/assets/files/ccrs.pdf", content)
+        self.assertIn("/assets/files/arc-guidelines.pdf", content)
+        self.assertIn("/assets/files/arc-request-form.pdf", content)
+        self.assertIn("/assets/files/pavilion-use-form.pdf", content)
 
     def test_homepage_links_to_current_resources(self) -> None:
         content = (REPO_ROOT / "index.html").read_text(encoding="utf-8")

@@ -1,11 +1,12 @@
 # Brooke's Crossing Static Site
 
-This repo now contains a cleaned, hand-authored static site for `brookescrossing.com`. It keeps the HOA content and downloadable forms, but removes the old WordPress-generated clutter, outdated posts, and stale event pages.
+This repo contains the static site for `brookescrossing.com`, including HOA content and downloadable forms.
 
 ## Structure
 
 - `index.html`: homepage
 - `about/`: ARC, dues, gate, and local links pages
+- `documents/`: downloadable HOA documents and forms
 - `board/`: board roster
 - `contact/`: contact details and map
 - `assets/`: stylesheet, images, and downloadable PDF files
